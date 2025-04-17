@@ -7,7 +7,7 @@ on:
       - master
       
   schedule:
-  - cron: "0 7,9,11 * * 1,3" # See https://crontab.guru/#0_7,9,11_*_*_1,3
+  - cron: "0 11 * * *" # See https://crontab.guru/#0_7,9,11_*_*_1,3
 
 jobs:
   auto_commit:
@@ -27,20 +27,53 @@ jobs:
           
       - name: Commit changes
         run: |
-          git config --local user.email "mazipanneh@gmail.com"
-          git config --local user.name "mazipan"
+          git config --local user.email "knoci@foxmail.com"
+          git config --local user.name "knoci"
           git add -A
           
-          arr[0]="chore(bot): 😂 auto commit"
-          arr[1]="chore(bot): 😱 auto commit"
-          arr[2]="chore(bot): 👿 auto commit"
-          arr[3]="chore(bot): 💩 auto commit"
-          arr[4]="chore(bot): 🙏 auto commit"
-          arr[5]="chore(bot): 🙈 auto commit"
-          arr[6]="chore(bot): 🐐 auto commit"
-          arr[7]="chore(bot): 🤖 auto commit"
-          arr[8]="chore(bot): 🟩 auto commit"
-          arr[9]="chore(bot): 👻 auto commit"
+          arr[0]="chore(bot): 😂 happy days "
+          arr[1]="chore(bot): 😱 terrible days"
+          arr[2]="chore(bot): 👿 evil days"
+          arr[3]="chore(bot): 💩 bad days"
+          arr[4]="chore(bot): 🙏 lucky days"
+          arr[5]="chore(bot): 🙈 monkey days"
+          arr[6]="chore(bot): 🐐 "
+          arr[7]="chore(bot): 🤖 bot days"
+          arr[8]="chore(bot): 🟩 green days"
+          arr[9]="chore(bot): 👻 go  - cron: "0 11 * * *" # See https://crontab.guru/#0_7,9,11_*_*_1,3
+
+jobs:
+  auto_commit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: DEBUG 
+        run: echo "::debug::Ref = ${{github.ref}}"
+      - uses: actions/checkout@v3      
+        with:
+         persist-credentials: false
+         fetch-depth: 0
+
+      - name: Modify last update
+        run: |
+          d=`date '+%Y-%m-%dT%H:%M:%SZ'`
+          echo $d > LAST_UPDATED
+          
+      - name: Commit changes
+        run: |
+          git config --local user.email "knoci@foxmail.com"
+          git config --local user.name "knoci"
+          git add -A
+          
+          arr[0]="chore(bot): 😂 happy day"
+          arr[1]="chore(bot): 😱 terrible day"
+          arr[2]="chore(bot): 👿 evil day"
+          arr[3]="chore(bot): 💩 bad day"
+          arr[4]="chore(bot): 🙏 lucky day"
+          arr[5]="chore(bot): 🙈 monkey day"
+          arr[6]="chore(bot): 🐐 "work day"
+          arr[7]="chore(bot): 🤖 bot day"
+          arr[8]="chore(bot): 🟩 green day"
+          arr[9]="chore(bot): 👻 ghost day"
           
           rand=$[$RANDOM % ${#arr[@]}]
           
@@ -50,4 +83,4 @@ jobs:
         uses: ad-m/github-push-action@v0.6.0
         with:
           directory: "."
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.GH_TOKEN }}
