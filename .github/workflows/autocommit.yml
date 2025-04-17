@@ -31,16 +31,16 @@ jobs:
           git config --local user.name "knoci"
           git add -A
           
-          arr[0]="chore(bot): 😂 happy day"
-          arr[1]="chore(bot): 😱 terrible day"
-          arr[2]="chore(bot): 👿 evil day"
-          arr[3]="chore(bot): 💩 bad day"
-          arr[4]="chore(bot): 🙏 lucky day"
-          arr[5]="chore(bot): 🙈 monkey day"
+          arr[0]="chore(bot): 😂 "happy day"
+          arr[1]="chore(bot): 😱 "terrible day"
+          arr[2]="chore(bot): 👿 "evil day"
+          arr[3]="chore(bot): 💩 "bad day"
+          arr[4]="chore(bot): 🙏 "lucky day"
+          arr[5]="chore(bot): 🙈 "monkey day"
           arr[6]="chore(bot): 🐐 "work day"
-          arr[7]="chore(bot): 🤖 bot day"
-          arr[8]="chore(bot): 🟩 green day"
-          arr[9]="chore(bot): 👻 ghost day"
+          arr[7]="chore(bot): 🤖 "bot day"
+          arr[8]="chore(bot): 🟩 "green day"
+          arr[9]="chore(bot): 👻 "ghost day"
           
           rand=$[$RANDOM % ${#arr[@]}]
           
