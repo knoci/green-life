@@ -1,53 +1,32 @@
-name: Auto commit
+name: Weekend Commit
 
 on:
-
-  push:
-    branches:
-      - master
-      
   schedule:
-  - cron: "0 11 * * *" # See https://crontab.guru/#0_7,9,11_*_*_1,3
+    # Runs at 11:00 UTC (19:00 CST) every Saturday and Sunday
+    - cron: "0 11 * * 6,0"  # Saturday (6) and Sunday (0)
 
 jobs:
-  auto_commit:
+  weekend_commit:
     runs-on: ubuntu-latest
     steps:
-      - name: DEBUG 
-        run: echo "::debug::Ref = ${{github.ref}}"
-      - uses: actions/checkout@v3      
+      - name: Checkout repository
+        uses: actions/checkout@v3
         with:
-         persist-credentials: false
-         fetch-depth: 0
+          persist-credentials: false
+          fetch-depth: 0
 
-      - name: Modify last update
-        run: |
-          d=`date '+%Y-%m-%dT%H:%M:%SZ'`
-          echo $d > LAST_UPDATED
-          
-      - name: Commit changes
+      - name: Create commit
         run: |
           git config --local user.email "knoci@foxmail.com"
           git config --local user.name "knoci"
-          git add -A
           
-          arr[0]="chore(bot): 😂 happy day"
-          arr[1]="chore(bot): 😱 terrible day"
-          arr[2]="chore(bot): 👿 evil day"
-          arr[3]="chore(bot): 💩 bad day"
-          arr[4]="chore(bot): 🙏 lucky day"
-          arr[5]="chore(bot): 🙈 monkey day"
-          arr[6]="chore(bot): 🐐 work day"
-          arr[7]="chore(bot): 🤖 bot day"
-          arr[8]="chore(bot): 🟩 green day"
-          arr[9]="chore(bot): 👻 ghost day"
+          # Create a simple file change
+          date '+%Y-%m-%d %H:%M:%S' > weekend_commit.txt
           
-          rand=$[$RANDOM % ${#arr[@]}]
+          git add weekend_commit.txt
+          git commit -m "chore(bot): 享受周末吧 🎉"
           
-          git commit -m "${arr[$rand]}"
-          
-      - name: GitHub Push
+      - name: Push changes
         uses: ad-m/github-push-action@v0.6.0
         with:
-          directory: "."
           github_token: ${{ secrets.GH_TOKEN }}
