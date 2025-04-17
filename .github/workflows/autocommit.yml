@@ -31,39 +31,6 @@ jobs:
           git config --local user.name "knoci"
           git add -A
           
-          arr[0]="chore(bot): 😂 happy days "
-          arr[1]="chore(bot): 😱 terrible days"
-          arr[2]="chore(bot): 👿 evil days"
-          arr[3]="chore(bot): 💩 bad days"
-          arr[4]="chore(bot): 🙏 lucky days"
-          arr[5]="chore(bot): 🙈 monkey days"
-          arr[6]="chore(bot): 🐐 "
-          arr[7]="chore(bot): 🤖 bot days"
-          arr[8]="chore(bot): 🟩 green days"
-          arr[9]="chore(bot): 👻 go  - cron: "0 11 * * *" # See https://crontab.guru/#0_7,9,11_*_*_1,3
-
-jobs:
-  auto_commit:
-    runs-on: ubuntu-latest
-    steps:
-      - name: DEBUG 
-        run: echo "::debug::Ref = ${{github.ref}}"
-      - uses: actions/checkout@v3      
-        with:
-         persist-credentials: false
-         fetch-depth: 0
-
-      - name: Modify last update
-        run: |
-          d=`date '+%Y-%m-%dT%H:%M:%SZ'`
-          echo $d > LAST_UPDATED
-          
-      - name: Commit changes
-        run: |
-          git config --local user.email "knoci@foxmail.com"
-          git config --local user.name "knoci"
-          git add -A
-          
           arr[0]="chore(bot): 😂 happy day"
           arr[1]="chore(bot): 😱 terrible day"
           arr[2]="chore(bot): 👿 evil day"
