@@ -1,0 +1,32 @@
+name: Weekend Commit
+
+on:
+  schedule:
+    # Runs at 11:00 UTC (19:00 CST) every Saturday and Sunday
+    - cron: "0 11 * * 6,0"  # Saturday (6) and Sunday (0)
+
+jobs:
+  weekend_commit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+
+      - name: Create commit
+        run: |
+          git config --local user.email "knoci@foxmail.com"
+          git config --local user.name "knoci"
+          
+          # Create a simple file change
+          date '+%Y-%m-%d %H:%M:%S' > weekend_commit.txt
+          
+          git add weekend_commit.txt
+          git commit -m "chore(bot): 享受周末吧 🎉"
+          
+      - name: Push changes
+        uses: ad-m/github-push-action@v0.6.0
+        with:
+          github_token: ${{ secrets.GH_TOKEN }}
