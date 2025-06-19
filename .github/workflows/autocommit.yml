@@ -24,7 +24,7 @@ jobs:
           date '+%Y-%m-%d %H:%M:%S' > weekend_commit.txt
           
           git add weekend_commit.txt
-          git commit -m "chore(bot): 享受周末吧 🎉"
+          git commit -m "chore(bot): 享受吧 🎉"
           
       - name: Push changes
         uses: ad-m/github-push-action@v0.6.0
